@@ -73,7 +73,7 @@ const Forms = () => {
   }
 
   return (
-    <div>
+    <div className="box">
       <form onSubmit={handleSubmit}>
         <label htmlFor="">
           <input

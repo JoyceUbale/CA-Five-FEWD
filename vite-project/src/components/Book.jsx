@@ -1,8 +1,8 @@
-// Book.js
-
+import React from "react";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Book.css';
+import { Link } from "react-router-dom";
 
 function Book() {
   const [books, setBooks] = useState([]);
@@ -43,7 +43,9 @@ function Book() {
           value={searchBook}
           onChange={handleSearch}
         />
+        <Link to="/forms">
         <button>REGISTER</button>
+        </Link>
       </div>
       <div className="container">
         {filteredBooks.map((book, index) => (
