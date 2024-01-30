@@ -37,17 +37,12 @@ function Book() {
     <>
       <div className="navbar">
         <h1>Kalvium Books</h1>
-        <input
-          type="text"
-          placeholder="Search for books..."
-          value={searchBook}
-          onChange={handleSearch}
-        />
+        <input className="search" type="text" placeholder="Search for books..." value={searchBook} onChange={handleSearch}/>
         <Link to="/forms">
         <button>REGISTER</button>
         </Link>
       </div>
-      <div className="container">
+      <div className="grid">
         {filteredBooks.map((book, index) => (
           <div key={index} className="item">
             <h2 className="title">{book.title}</h2>

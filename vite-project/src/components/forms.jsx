@@ -4,21 +4,19 @@ import "./forms.css";
 const Forms = () => {
   const initState = {
     firstName: "",
-    lastName: "",
     email: "",
-    contact: "",
+    password: "", 
+    confirmPassword: "", 
   };
   const alertState = {
     firstName: "",
-    lastName: "",
+
     email: "",
-    contact: "",
+
   };
   const focusState = {
     firstName: false,
-    lastName: false,
     email: false,
-    contact: false,
   };
 
   const [formdata, setFormdata] = React.useState(initState);
@@ -48,11 +46,6 @@ const Forms = () => {
       messageBox.firstName = "";
     }
 
-    if (formdata.lastName === "") {
-        messageBox.lastName = "Please Enter your last Name";
-      } else {
-        messageBox.lastName = "";
-      }
 
       if (formdata.email === "") {
         messageBox.email = "Please Enter your email";
@@ -60,15 +53,28 @@ const Forms = () => {
         messageBox.email = "";
       }
 
-      if (formdata.contact === "") {
-        messageBox.contact = "Please Enter your Contact number";
+      if (formdata.password === "") {
+        messageBox.password = "Please Enter your password";
+      } else if (formdata.password.length < 10) {
+        messageBox.password = "Password should be at least 10 characters long";
       } else {
-        messageBox.contact = "";
+        messageBox.password = "";
+      }
+
+      if (formdata.confirmPassword !== formdata.password) {
+        messageBox.confirmPassword = "Passwords do not match";
+      } else {
+        messageBox.confirmPassword = "";
       }
 
       setAlert(messageBox);
-      if(messageBox.firstName=='' && messageBox.lastName=="" && messageBox.email==''&& messageBox.contact==''){
-        setRegistrationSuccess(true)
+      if (
+        messageBox.firstName === "" &&
+        messageBox.email === "" &&
+        messageBox.password === "" &&
+        messageBox.confirmPassword === ""
+      ) {
+        setRegistrationSuccess(true);
       }
   }
 
@@ -87,18 +93,7 @@ const Forms = () => {
           />
           <div>{alert.firstName}</div>
         </label>
-        <label htmlFor="">
-          <input
-            type="text"
-            name="lastName"
-            value={formdata.lastName}
-            onChange={handleChange}
-            onFocus={() => handleFocus("lastName")}
-            placeholder="Enter your last name"
-            style={{ borderColor: focus.lastName ? "blue" : "#ccc" }}
-          />
-          <div>{alert.lastName}</div>
-        </label>
+        
         <label htmlFor="">
           <input
             type="email"
@@ -111,18 +106,33 @@ const Forms = () => {
           />
           <div>{alert.email}</div>
         </label>
+
         <label htmlFor="">
           <input
-            type="tel"
-            name="contact"
-            value={formdata.contact}
+            type="password"
+            name="password"
+            value={formdata.password}
             onChange={handleChange}
-            onFocus={() => handleFocus("contact")}
-            placeholder="Enter your conatct number"
-            style={{ borderColor: focus.contact ? "blue" : "#ccc" }}
+            onFocus={() => handleFocus("password")}
+            placeholder="Enter your password"
+            style={{ borderColor: focus.password ? "blue" : "#ccc" }}
           />
-          <div>{alert.contact}</div>
+          <div>{alert.password}</div>
         </label>
+
+        <label htmlFor="">
+          <input
+            type="password"
+            name="confirmPassword"
+            value={formdata.confirmPassword}
+            onChange={handleChange}
+            onFocus={() => handleFocus("confirmPassword")}
+            placeholder="Repeat your password"
+            style={{ borderColor: focus.confirmPassword ? "blue" : "#ccc" }}
+          />
+          <div>{alert.confirmPassword}</div>
+        </label>
+
         <button>Register</button>
       </form>
       <div>
