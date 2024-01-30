@@ -5,30 +5,36 @@ import './Book.css';
 import { Link } from "react-router-dom";
 
 function Book() {
+  // State to store the list of books and the search input value
   const [books, setBooks] = useState([]);
   const [searchBook, setSearchBook] = useState('');
 
+  // useEffect hook to fetch the list of books when the component mounts
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        // Fetch books from the API
         const result = await axios.get('https://reactnd-books-api.udacity.com/books', {
           headers: { 'Authorization': 'whatever-you-want' }
         });
 
+        // Update the books state with the fetched data
         setBooks(result.data.books);
       } catch (error) {
+        // Handle errors, log status code and a generic message
         console.log("Status Code : ", error.response.status);
         console.log("Website not found");
       }
     };
-
+  // Call the fetchUserData function when the component mounts
     fetchUserData();
   }, []);
-
+// Event handler for updating the searchBook state based on user input
   const handleSearch = (e) => {
     setSearchBook(e.target.value);
   };
 
+  // Filter the books based on the search input
   const filteredBooks = books.filter((book) =>
     book.title.toLowerCase().includes(searchBook.toLowerCase())
   );

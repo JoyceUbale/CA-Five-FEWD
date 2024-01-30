@@ -2,6 +2,7 @@ import React from "react";
 import "./forms.css";
 
 const Forms = () => {
+  // Initial state for form data, alert messages, focus state, and registration success
   const initState = {
     firstName: "",
     email: "",
@@ -19,40 +20,44 @@ const Forms = () => {
     email: false,
   };
 
+   // State hooks for form data, alert messages, focus state, and registration success
   const [formdata, setFormdata] = React.useState(initState);
   const [alert, setAlert] = React.useState(alertState);
   const [focus, setFocus] = React.useState(focusState);
   const [registationSuccess, setRegistrationSuccess] = React.useState(false);
 
+  // Handle changes in input fields
   function handleChange(e) {
     // console.log(e.target.value)
     const { name, value } = e.target;
     console.log(name, value);
     setFormdata((prevData) => ({ ...prevData, [name]: value }));
   }
+  // Handle input focus events
   function handleFocus(name) {
     setFocus((prevFocusData) => ({ ...prevFocusData, [name]: true }));
   }
 
+  // Handle form submission
   function handleSubmit(e) {
     e.preventDefault();
-
+// Object to store validation messages
     let messageBox = {};
 
-    //validation
+    // Validation for first name
     if (formdata.firstName === "") {
       messageBox.firstName = "Please Enter your first Name";
     } else {
       messageBox.firstName = "";
     }
 
-
+// Validation for email
       if (formdata.email === "") {
         messageBox.email = "Please Enter your email";
       } else {
         messageBox.email = "";
       }
-
+// Validation for password
       if (formdata.password === "") {
         messageBox.password = "Please Enter a password";
       } else if (formdata.password.length < 5) {
@@ -63,13 +68,15 @@ const Forms = () => {
         messageBox.password = "";
       }
 
+      // Validation for confirmPassword
       if (formdata.confirmPassword !== formdata.password) {
         messageBox.confirmPassword = "Passwords do not match";
       } else {
         messageBox.confirmPassword = "";
       }
-
+ // Update alert messages state
       setAlert(messageBox);
+       // Check if all validation passed for successful registration
       if (
         messageBox.firstName === "" &&
         messageBox.email === "" &&
