@@ -1,6 +1,6 @@
 import React from "react";
 import Book from "./components/Book";
-import Forms from "./components/Forms";
+import Forms from "./components/forms";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
