@@ -54,9 +54,11 @@ const Forms = () => {
       }
 
       if (formdata.password === "") {
-        messageBox.password = "Please Enter your password";
-      } else if (formdata.password.length < 10) {
-        messageBox.password = "Password should be at least 10 characters long";
+        messageBox.password = "Please Enter a password";
+      } else if (formdata.password.length < 5) {
+        messageBox.password = "Password should be at least 5 characters";
+      } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(formdata.password)) {
+        messageBox.password = "Password should contain special characters";
       } else {
         messageBox.password = "";
       }
